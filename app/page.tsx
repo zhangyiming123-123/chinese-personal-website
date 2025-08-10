@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
+import { useRouter } from "next/navigation"
 import {
   X,
   ExternalLink,
@@ -30,6 +31,7 @@ const floatingElements = [
   { id: 5, type: "skill", title: "数据分析", category: "核心技能", color: "#00FFD0" },
   { id: 6, type: "insight", title: "人机交互革命", category: "行业洞察", color: "#00FFD0" },
   { id: 7, type: "learning", title: "学习总结分享", category: "成长记录", color: "#00FFD0" },
+  { id: "ai-product-manager", type: "insight", title: "AI产品经理成长记", category: "成长记录", color: "#00FFD0" },
 ]
 
 // 联系方式弹窗
@@ -154,22 +156,23 @@ function StatsCounter({ value, label, delay = 0 }: { value: string; label: strin
 }
 
 // 修改点击处理逻辑，添加简历页面跳转
-const handleElementClick = (element: any) => {
+const handleElementClick = (element: any, navigate: (path: string) => void) => {
   if (element.type === "project") {
-    window.location.href = `/projects/${element.id}`
+    navigate(`/projects/${element.id}`)
   } else if (element.type === "skill") {
-    window.location.href = `/skills/${element.id}`
+    navigate(`/skills/${element.id}`)
   } else if (element.type === "insight") {
-    window.location.href = `/insights/${element.id}`
+    navigate(`/insights/${element.id}`)
   } else if (element.type === "resume") {
-    window.location.href = `/resume`
+    navigate(`/resume`)
   } else if (element.type === "learning") {
-    window.location.href = `/learning-summary`
+    navigate(`/learning-summary`)
   }
 }
 
 export default function HomePage() {
   const [showContact, setShowContact] = useState(false)
+  const router = useRouter()
 
   return (
     <div className="min-h-screen bg-[#0C0E1A] relative overflow-hidden">
@@ -316,7 +319,7 @@ export default function HomePage() {
               }
             }}
             className="cursor-pointer group relative"
-            onClick={() => handleElementClick(element)}
+            onClick={() => handleElementClick(element, (path: string) => router.push(path))}
           >
             {/* 悬浮光效 */}
             <motion.div
@@ -618,7 +621,7 @@ export default function HomePage() {
                       rotate: [0, 10, -10, 0]
                     }}
                     transition={{ 
-                      duration: 2, 
+                      duration: 2,
                       repeat: Number.POSITIVE_INFINITY,
                       ease: "easeInOut"
                     }}
@@ -676,7 +679,7 @@ export default function HomePage() {
                       scale: [1, 1.1, 1]
                     }}
                     transition={{ 
-                      duration: 1.5, 
+                      duration: 1.5,
                       repeat: Number.POSITIVE_INFINITY,
                       ease: "easeInOut"
                     }}
@@ -781,7 +784,7 @@ export default function HomePage() {
                     rotate: [0, 5, -5, 0]
                   }}
                   transition={{ 
-                    duration: 2, 
+                    duration: 2,
                     repeat: Number.POSITIVE_INFINITY,
                     ease: "easeInOut"
                   }}
@@ -811,7 +814,7 @@ export default function HomePage() {
                     scale: [1, 1.1, 1]
                   }}
                   transition={{ 
-                    duration: 1.5, 
+                    duration: 1.5,
                     repeat: Number.POSITIVE_INFINITY,
                     ease: "easeInOut"
                   }}
@@ -950,6 +953,51 @@ export default function HomePage() {
                 >
                   联系我
                 </motion.span>
+              </Button>
+            </motion.div>
+
+            {/* 直达文章按钮 */}
+            <motion.div 
+              initial={{ opacity: 0, x: 0, scale: 0.8 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: 2.0,
+                type: "spring",
+                stiffness: 150
+              }}
+              whileHover={{ 
+                scale: 1.1, 
+                y: -5,
+                transition: {
+                  type: "spring",
+                  stiffness: 400,
+                  damping: 10
+                }
+              }} 
+              whileTap={{ scale: 0.95 }}
+              className="relative group"
+            >
+              {/* 按钮光效 */}
+              <motion.div
+                className="absolute -inset-1 bg-gradient-to-r from-[#00FFD0]/25 to-transparent rounded-lg blur-md opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                animate={{
+                  scale: [1, 1.1, 1],
+                  opacity: [0.2, 0.45, 0.2],
+                }}
+                transition={{
+                  duration: 2.2,
+                  repeat: Number.POSITIVE_INFINITY,
+                }}
+              />
+
+              <Button
+                variant="outline"
+                className="relative border-[#00FFD0]/60 text-[#00FFD0] hover:bg-[#00FFD0]/15 bg-transparent backdrop-blur-sm shadow-xl shadow-[#00FFD0]/30 transition-all duration-300 px-6 py-3"
+                onClick={() => router.push("/insights/ai-product-manager")}
+              >
+                <BookOpen className="w-4 h-4 mr-2" />
+                查看 AI 产品经理成长记
               </Button>
             </motion.div>
           </motion.div>
