@@ -14,7 +14,7 @@ const outfit = Outfit({
 })
 
 export const metadata: Metadata = {
-  title: "具身智能的实践者与创新者 - AI产品经理作品集",
+  title: "当艺术遇到AI：一个产品经理的具身智能创作手记",
   description:
     "专注于具身智能领域的AI产品经理，通过严谨的执行力将前沿技术变为现实。探索智能机器人、人机交互等前沿应用。",
   keywords: "具身智能,AI产品经理,机器人,人工智能,产品管理,创新",

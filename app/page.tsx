@@ -486,14 +486,14 @@ export default function HomePage() {
             transition={{ duration: 1, delay: 0.4 }}
           >
             <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 font-['Outfit'] leading-tight">
-              <span className="inline-block">具身智能的</span>
+              <span className="inline-block">当艺术遇到AI：</span>
               <motion.span
                 className="text-[#00FFD0] block relative"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.8 }}
               >
-                实践者与创新者
+                一个产品经理的具身智能创作手记
                 <motion.div
                   className="absolute -bottom-2 left-0 h-1 bg-gradient-to-r from-[#00FFD0] to-transparent"
                   initial={{ width: 0 }}
