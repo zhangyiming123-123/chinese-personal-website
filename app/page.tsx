@@ -18,6 +18,7 @@ import {
   TrendingUp,
   Award,
   Sparkles,
+  BookOpen,
 } from "lucide-react"
 
 // 漂浮元素数据 - 简化为静态卡片布局
@@ -28,6 +29,7 @@ const floatingElements = [
   { id: 4, type: "resume", title: "个人简历", category: "关于我", color: "#00FFD0" },
   { id: 5, type: "skill", title: "数据分析", category: "核心技能", color: "#00FFD0" },
   { id: 6, type: "insight", title: "人机交互革命", category: "行业洞察", color: "#00FFD0" },
+  { id: 7, type: "learning", title: "学习总结分享", category: "成长记录", color: "#00FFD0" },
 ]
 
 // 联系方式弹窗
@@ -161,6 +163,8 @@ const handleElementClick = (element: any) => {
     window.location.href = `/insights/${element.id}`
   } else if (element.type === "resume") {
     window.location.href = `/resume`
+  } else if (element.type === "learning") {
+    window.location.href = `/learning-summary`
   }
 }
 
@@ -379,6 +383,20 @@ export default function HomePage() {
                   }}
                 />
                 {element.category}
+              </motion.div>
+              
+              {/* 图标 */}
+              <motion.div
+                className="mb-3 flex justify-center"
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ duration: 0.6, delay: index * 0.3 + 0.9 }}
+              >
+                {element.type === "project" && <Code className="w-6 h-6 text-[#00FFD0]" />}
+                {element.type === "skill" && <Target className="w-6 h-6 text-[#00FFD0]" />}
+                {element.type === "insight" && <Brain className="w-6 h-6 text-[#00FFD0]" />}
+                {element.type === "resume" && <User className="w-6 h-6 text-[#00FFD0]" />}
+                {element.type === "learning" && <BookOpen className="w-6 h-6 text-[#00FFD0]" />}
               </motion.div>
               
               {/* 标题 */}
